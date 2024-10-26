@@ -13,8 +13,15 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }));
       });
     },
+    "@nuxtjs/google-fonts",
     //...
   ],
+  googleFonts: {
+    families: {
+      Inter: [700, 800],
+      Oswald: [400, 700],
+    },
+  },
   vite: {
     vue: {
       template: {

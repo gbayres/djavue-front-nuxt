@@ -1,11 +1,12 @@
 <template>
-  <header class="d-flex w-100 align-center justify-center font-weight-bold py-3 position-fixed top-0">
-    <div :style="`${$vuetify.display.mdAndUp ? 'max-width: 1380px' : ''}`" class="d-flex w-100 align-center mx-8 justify-space-between">
+  <header style="transition: all 0.5s; z-index: 1;" :class="`${scrollPosition > 0 && 'bg-background'}`" class=" d-flex w-100 align-center justify-center font-weight-bold py-3 position-fixed top-0">
+    <div style="max-width: 1380px;"
+      class="d-flex w-100 align-center mx-8 justify-space-between">
       <span>D-Jà Vue</span>
-      <div style="height: 2.5rem;" class="d-flex align-center ga-3">
+      <div style="height: 2.5rem;" class="d-none d-md-flex align-center ga-3">
         <v-btn variant="plain" class="px-2 text-primary font-weight-bold text-capitalize" style="text-decoration: none"
           href="https://www.djavue.org/01-o-que-eh.html">Documentação</v-btn>
-          <v-divider class="py-auto" vertical inset thickness="2px"></v-divider>
+        <v-divider class="py-auto" vertical inset thickness="2px"></v-divider>
         <v-btn variant="plain" class="px-2 text-primary font-weight-bold text-capitalize" style="text-decoration: none"
           href="login">Login</v-btn>
         <v-divider class="py-auto" vertical inset thickness="2px"></v-divider>
@@ -14,19 +15,22 @@
       </div>
     </div>
   </header>
-  <div :style="`padding: ${$vuetify.display.mdAndUp ? '4rem' : '2rem'};`" class="d-flex justify-center align-center w-100 h-100">
+  <div style="margin-top: 90px;" :style="`padding: ${$vuetify.display.mdAndUp ? '4rem' : '1.5rem'}`"
+    class="d-flex justify-center w-100 h-100">
     <div class="d-flex flex-column w-100" style="max-width: 1200px">
-      <div class="d-flex flex-column" :style="`${$vuetify.display.mdAndUp ? 'width: 600px' : ''}`">
-        <h1 class="text-h5 text-md-h2 mb-2 text-primary font-weight-bold">D-Jà
+      <div class="d-flex flex-column" style="max-width: 600px;" :style="`${$vuetify.display.mdAndUp ? 'width: 600px;' : ''}`">
+        <h1 class="text-h4 text-md-h2 mb-2 text-primary font-weight-bold">D-Jà
           Vue</h1>
-        <h1 :style="`${$vuetify.display.mdAndUp ? 'line-height: 4rem;' : '' }opacity: 0.85`" class="text-h5 text-md-h2 font-weight-extrabold text-accent">
+        <h1 :style="`${$vuetify.display.mdAndUp ? 'line-height: 4rem;' : ''}opacity: 0.85`"
+          class="text-h4 text-md-h2 font-weight-extrabold text-accent">
           Gerador de projeto full-stack,
           pronto para produção e
           focado na
           produtividade
           ⚡</h1>
-        <p style="font-weight: 400;" class="mt-4 text-h5 text-grey-darken-1">Vue 3 | Vite | Vuetify e Backend Django 🦄
-          API</p>
+        <p style="font-weight: 400;" class="mt-4 text-h6 text-md-h5 text-grey-darken-1">Vue 3 | Vite | Vuetify e Backend
+          Django 🦄
+          API </p>
         <v-btn width="90px" style="height: 2.5rem; font-weight: 700;" variant="tonal"
           class="text-bold mt-8 text-capitalize bg-primary rounded-xl">Iniciar</v-btn>
       </div>
@@ -45,6 +49,22 @@
 <script setup lang="ts">
 import { useTheme } from "vuetify";
 const theme = useTheme();
+const scrollPosition = ref(0)
+
+function updateScrollPosition() {
+  scrollPosition.value = window.scrollY
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateScrollPosition)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateScrollPosition)
+})
+
+
+
 useHead({
   title: 'D-jà Vue',
   meta: [

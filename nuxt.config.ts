@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
+  css: ["~/assets/css/main.css"],
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
@@ -18,7 +19,7 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Inter: [700, 800],
+      Inter: [400, 700, 800],
     },
   },
   vite: {

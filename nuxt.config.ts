@@ -6,15 +6,14 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
-  css: ["~/assets/css/main.css"],
   modules: [
+    "@nuxtjs/google-fonts",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
         config.plugins.push(vuetify({ autoImport: true }));
       });
     },
-    "@nuxtjs/google-fonts",
     //...
   ],
   googleFonts: {

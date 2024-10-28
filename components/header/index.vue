@@ -1,22 +1,33 @@
 <template>
-    <header style="transition: all 0.5s; z-index: 1;"
-        class="bg-background pa-2 d-flex w-100 align-center justify-center position-fixed font-weight-bold top-0">
-        <div style="max-width: 1380px; height: 2.5rem;"
-            class="d-flex w-100 align-center mx-2 mx-md-8 justify-space-between">
-            <span>D-Jà Vue</span>
-            <nav class="d-none d-md-flex align-center ga-3">
-                <HeaderNavButton v-if="route.path !== '/'" divider href="/">Início</HeaderNavButton>
-                <HeaderNavButton v-if="route.path !== '/login'" divider href="login">Login</HeaderNavButton>
-                <DevOnly>
-                    <HeaderNavButton divider href="https://www.djavue.org/01-o-que-eh.html">Documentação
-                    </HeaderNavButton>
-                </DevOnly>
-                <DarkModeSwitch />
-            </nav>
+    <v-app-bar is="header" scroll-threshold="32" scroll-behavior="hide" class="px-md-12" elevation="0"
+        color="#cccccc50">
+        <v-toolbar-title class="font-weight-black text-primary">
+            D-jà Vue
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <HeaderNav :items="items" direction="horizontal" />
+        <div class="mx-md-3">
+            <DarkModeSwitch />
         </div>
-    </header>
+        <v-app-bar-nav-icon class="d-flex d-md-none" variant="text" @click.stop="drawer = !drawer" />
+    </v-app-bar>
+    <ClientOnly>
+        <v-navigation-drawer class="pa-4" v-model="drawer" location="right" temporary>
+            <HeaderNav :items="items" direction="vertical" />
+        </v-navigation-drawer>
+    </ClientOnly>
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const drawer = ref(false)
+const items = ref([
+    {
+        title: 'Home',
+        href: '/'
+    },
+    {
+        title: 'Login',
+        href: '/login'
+    },
+])
 </script>

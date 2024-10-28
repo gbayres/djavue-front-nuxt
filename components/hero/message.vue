@@ -16,5 +16,6 @@ const { title, description, details } = defineProps<{
     details: string,
 }>()
 const { mdAndUp } = useDisplay()
-const descriptionStyle = computed(() => `${mdAndUp ? 'line-height: 4rem' : ''}; opacity: 0.85;`)
+
+const descriptionStyle = computed(() => `${mdAndUp.value ? 'line-height: 4rem' : ''}; opacity: 0.85;`)
 </script>

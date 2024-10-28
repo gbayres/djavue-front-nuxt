@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const { href, divider = false } = defineProps<{
+const { href, divider } = defineProps<{
     href: string,
     divider?: boolean,
 }>()

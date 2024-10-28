@@ -6,7 +6,10 @@
             <nav class="d-none d-md-flex align-center ga-3">
                 <HeaderNavButton v-if="route.path !== '/'" divider href="/">Início</HeaderNavButton>
                 <HeaderNavButton v-if="route.path !== '/login'" divider href="login">Login</HeaderNavButton>
-                <HeaderNavButton divider href="https://www.djavue.org/01-o-que-eh.html">Documentação</HeaderNavButton>
+                <DevOnly>
+                    <HeaderNavButton divider href="https://www.djavue.org/01-o-que-eh.html">Documentação
+                    </HeaderNavButton>
+                </DevOnly>
                 <DarkModeSwitch />
             </nav>
         </div>

@@ -1,8 +1,8 @@
 <template>
     <ClientOnly>
-        <v-switch v-model="isDark" inset style="transform: scale(0.7)" true-icon="mdi-weather-night"
-            false-icon="mdi-weather-sunny" hide-details />
-        <template #fallback>
+        <v-switch key="dark-mode-switch" v-model="isDark" inset style="transform: scale(0.7)"
+            true-icon="mdi-weather-night" false-icon="mdi-weather-sunny" hide-details />
+        <template key="dark-mode-switch-loading" #fallback>
             <v-switch inset disabled loading style="transform: scale(0.7)" hide-details />
         </template>
     </ClientOnly>

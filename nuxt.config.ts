@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/google-fonts",
     "@vueuse/nuxt",
+    "@nuxt/image",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -18,6 +19,7 @@ export default defineNuxtConfig({
     },
     //...
   ],
+  image: {},
   googleFonts: {
     families: {
       Inter: [400, 700, 800],

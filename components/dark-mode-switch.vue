@@ -6,9 +6,13 @@
             <v-switch inset disabled loading style="transform: scale(0.7)" hide-details />
         </template>
     </ClientOnly>
+    <HeaderNavDivider v-if="divider" />
 </template>
 
 <script setup lang="ts">
+defineProps<{
+    divider?: boolean
+}>()
 import { useTheme } from "vuetify";
 import { useStorage } from "@vueuse/core";
 const theme = useTheme();

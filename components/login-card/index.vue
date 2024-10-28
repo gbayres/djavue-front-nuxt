@@ -26,9 +26,13 @@
                 Entrar
             </v-btn>
 
-            <v-card-text class="text-center">
+            <v-card-text class="text-center w-100 justify-center d-flex ga-3">
+                <NuxtLink class="text-blue text-decoration-none" to="/" rel="noopener noreferrer">
+                    <v-icon icon="mdi-chevron-left"></v-icon> Voltar
+                </NuxtLink>
+                |
                 <NuxtLink class="text-blue text-decoration-none" to="/sign-up" rel="noopener noreferrer">
-                    Cadastre-se <v-icon icon="mdi-chevron-right"></v-icon>
+                    Cadastrar <v-icon icon="mdi-chevron-right"></v-icon>
                 </NuxtLink>
             </v-card-text>
         </v-card>

@@ -8,8 +8,8 @@
         <v-card class="mx-auto pa-8 pb-8 border-md" elevation="0" max-width="448" rounded="lg">
             <div class="text-subtitle-1 text-medium-emphasis">E-mail</div>
 
-            <v-text-field density="compact" placeholder="Endereço de e-mail" prepend-inner-icon="mdi-email-outline"
-                variant="outlined"></v-text-field>
+            <v-text-field v-model="user.name" density="compact" placeholder="Endereço de e-mail"
+                prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
 
             <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
                 Senha
@@ -18,11 +18,12 @@
                     Esqueceu a senha?</NuxtLink>
             </div>
 
-            <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
-                density="compact" placeholder="Insira sua senha" prepend-inner-icon="mdi-lock-outline"
-                variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
+            <v-text-field v-model="user.password" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                :type="visible ? 'text' : 'password'" density="compact" placeholder="Insira sua senha"
+                prepend-inner-icon="mdi-lock-outline" variant="outlined"
+                @click:append-inner="visible = !visible"></v-text-field>
 
-            <v-btn class="mb-8" color="primary" size="large" variant="tonal" block>
+            <v-btn :loading="status === 'pending'" @click="login" class="mb-8" color="primary" size="large" variant="tonal" block>
                 Entrar
             </v-btn>
 
@@ -34,6 +35,7 @@
                 <NuxtLink class="text-blue text-decoration-none" to="/sign-up" rel="noopener noreferrer">
                     Cadastrar <v-icon icon="mdi-chevron-right"></v-icon>
                 </NuxtLink>
+                <p>{{ status === 'pending' ? 'loading' : '' }}</p>
             </v-card-text>
         </v-card>
     </div>
@@ -52,5 +54,27 @@
 </style>
 
 <script setup lang="ts">
+import { useAccountsStore } from '~/stores/accountsStore';
+
 const visible = ref(false)
+const store = useAccountsStore()
+const user = reactive({
+    name: '',
+    password: '',
+
+})
+
+const { execute: login, status } = await useAsyncData(async () => {
+    try {
+        await store.login(user.name, user.password)
+        navigateTo('/tasks')
+    } catch(e) {
+        console.log('falhou')
+    }
+    return true
+}, {
+    immediate: false,
+})
+
+
 </script>

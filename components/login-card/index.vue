@@ -1,5 +1,5 @@
 <template>
-    <div class="login-card">
+    <v-form @keyup.enter="login" class="login-card">
         <div class="d-flex my-4 justify-center align-center ga-2">
             <NuxtImg width="48px" max-width="48" src="/img/logo.svg"></NuxtImg>
             <span class="text-h6 text-primary font-weight-black">D-jà Vue</span>
@@ -8,7 +8,7 @@
         <v-card class="mx-auto pa-8 pb-8 border-md" elevation="0" max-width="448" rounded="lg">
             <div class="text-subtitle-1 text-medium-emphasis">E-mail</div>
 
-            <v-text-field v-model="user.name" density="compact" placeholder="Endereço de e-mail"
+            <v-text-field  v-model="user.name" density="compact" placeholder="Endereço de e-mail"
                 prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
 
             <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
@@ -23,7 +23,7 @@
                 prepend-inner-icon="mdi-lock-outline" variant="outlined"
                 @click:append-inner="visible = !visible"></v-text-field>
 
-            <v-btn :loading="status === 'pending'" @click="login" class="mb-8" color="primary" size="large" variant="tonal" block>
+            <v-btn is="submit" :loading="status === 'pending'" @click="login" class="mb-8" color="primary" size="large" variant="tonal" block>
                 Entrar
             </v-btn>
 
@@ -38,7 +38,7 @@
                 <p>{{ status === 'pending' ? 'loading' : '' }}</p>
             </v-card-text>
         </v-card>
-    </div>
+    </v-form>
 </template>
 
 <style scoped>
@@ -54,8 +54,6 @@
 </style>
 
 <script setup lang="ts">
-import { useAccountsStore } from '~/stores/accountsStore';
-
 const visible = ref(false)
 const store = useAccountsStore()
 const user = reactive({

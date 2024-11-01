@@ -20,20 +20,43 @@
     </ClientOnly>
 </template>
 
+
 <script setup lang="ts">
+export type NavItem = {
+    title: string,
+    href: string,
+    show: boolean
+}
 const drawer = ref(false)
-const items = ref([
+const accountStore = useAccountStore()
+const { loggedUser } = storeToRefs(accountStore)
+
+
+const items = computed<NavItem[]>(() => [
     {
         title: 'Início',
-        href: '/'
+        href: '/',
+        show: !loggedUser.value,
     },
     {
         title: 'Cadastrar',
-        href: '/sign-up'
+        href: '/sign-up',
+        show: !loggedUser.value
     },
     {
         title: 'Entrar',
-        href: '/login'
+        href: '/login',
+        show: !loggedUser.value
+    },
+    {
+        title: 'Home',
+        href: '/home',
+        show: !!loggedUser.value
+    },
+    {
+        title: 'Sair',
+        href: '/logout',
+        show: !!loggedUser.value
     },
 ])
 </script>

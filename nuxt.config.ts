@@ -7,10 +7,16 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.NUXT_PUBLIC_BASE_URL,
+    }
+  },
   modules: [
     "@nuxtjs/google-fonts",
     "@vueuse/nuxt",
     "@nuxt/image",
+    '@pinia/nuxt',
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error

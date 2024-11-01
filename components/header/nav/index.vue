@@ -1,7 +1,7 @@
 <template>
     <nav :class="compClass">
         <template v-for="item in items">
-            <HeaderNavButton :key="item.href" :href="item.href" v-if="route.path != item.href" divider>
+            <HeaderNavButton :key="item.href" :href="item.href" v-if="item.show && route.path != item.href" divider>
                 {{ item.title }}
             </HeaderNavButton>
         </template>
@@ -13,9 +13,11 @@
 </template>
 
 <script setup lang="ts">
+import type { NavItem } from '../index.vue';
+
 const { direction } = defineProps<{
     direction: 'vertical' | 'horizontal',
-    items: { title: string, href: string }[]
+    items: NavItem[]
 }>()
 
 const compClass = computed(() => {

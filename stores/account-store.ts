@@ -17,5 +17,25 @@ export const useAccountStore = defineStore("account-store", () => {
         return null
     }
 
-    return { login, loading, loggedUser }
+    type Response = {
+        authenticated: boolean
+    }
+
+    async function logout() {
+        loading.value = true
+        try {
+            const response: Response = await $api('api/accounts/logout', { method: 'post' })
+            if (response.authenticated === false) {
+                loggedUser.value = null
+            }
+            return response
+        } catch (e) {
+            console.log(e)
+        } finally {
+            loading.value = false
+        }
+        return null
+    }
+
+    return { login, logout, loading, loggedUser }
 })

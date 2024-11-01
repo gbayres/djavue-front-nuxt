@@ -7,10 +7,6 @@ export const useAccountsStore = defineStore("accountsStore", {
     loggedUser: null,
   }),
   actions: {
-    async helloWorld() {
-      console.log('opa')
-      return 'Olá'
-    },
     async whoAmI() {
       const response = await AccountsApi.whoami()
       const loggedIn = response.authenticated && response.user

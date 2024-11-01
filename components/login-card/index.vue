@@ -1,5 +1,5 @@
 <template>
-    <v-form @keyup.enter="login" class="login-card">
+    <v-form @keyup.enter="login(user.name, user.password)" class="login-card">
         <div class="d-flex my-4 justify-center align-center ga-2">
             <NuxtImg width="48px" max-width="48" src="/img/logo.svg"></NuxtImg>
             <span class="text-h6 text-primary font-weight-black">D-jà Vue</span>
@@ -23,7 +23,7 @@
                 prepend-inner-icon="mdi-lock-outline" variant="outlined"
                 @click:append-inner="visible = !visible"></v-text-field>
 
-            <v-btn is="submit" :loading="status === 'pending'" @click="login" class="mb-8" color="primary" size="large" variant="tonal" block>
+            <v-btn is="submit" :loading="loading" @click="login(user.name, user.password)" class="mb-8" color="primary" size="large" variant="tonal" block>
                 Entrar
             </v-btn>
 
@@ -35,7 +35,6 @@
                 <NuxtLink class="text-blue text-decoration-none" to="/sign-up" rel="noopener noreferrer">
                     Cadastrar <v-icon icon="mdi-chevron-right"></v-icon>
                 </NuxtLink>
-                <p>{{ status === 'pending' ? 'loading' : '' }}</p>
             </v-card-text>
         </v-card>
     </v-form>
@@ -55,24 +54,21 @@
 
 <script setup lang="ts">
 const visible = ref(false)
-const store = useAccountsStore()
+
+const accountStore = useAccountStore()
+const { login } = accountStore;
+const { loggedUser, loading } = storeToRefs(accountStore)
 const user = reactive({
     name: '',
     password: '',
 
 })
 
-const { execute: login, status } = await useAsyncData(async () => {
-    try {
-        await store.login(user.name, user.password)
+watch(loggedUser, () => {
+    if (loggedUser.value) {
         navigateTo('/tasks')
-    } catch(e) {
-        console.log('falhou')
     }
-    return true
-}, {
-    immediate: false,
-})
+}, { immediate: true })
 
 
 </script>

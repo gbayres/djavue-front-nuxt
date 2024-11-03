@@ -18,7 +18,7 @@ type AuthenticatedType = {
 };
 
 export const useAccountStore = defineStore("account-store", () => {
-  const loggedUser = ref<UserType | null>(null);
+  const loggedUser = ref<UserType | null | undefined>(undefined);
   const loading = ref(false);
   const { $api } = useNuxtApp();
 
@@ -47,6 +47,7 @@ export const useAccountStore = defineStore("account-store", () => {
         body: { username, password },
       });
       loggedUser.value = response;
+      navigateTo("/home");
       return response;
     } catch (e) {
       console.log(e);
@@ -65,6 +66,7 @@ export const useAccountStore = defineStore("account-store", () => {
       if (!response.authenticated) {
         loggedUser.value = null;
       }
+      navigateTo("/");
       return response;
     } catch (e) {
       console.log(e);

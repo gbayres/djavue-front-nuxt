@@ -14,16 +14,14 @@
 </template>
 
 <script setup lang="ts">
+import type { MiddlewareKey } from '#build/types/middleware';
+definePageMeta({
+  middleware: 'unauthenticated' as MiddlewareKey
+})
 useHead({
   title: 'D-jà Vue',
   meta: [
     { name: 'description', content: 'Gerador de projeto full-stack com Django e Vue' }
   ],
-})
-
-const { whoAmI } = useAccountStore()
-
-onMounted(async () => {
-  const res = await whoAmI()
 })
 </script>

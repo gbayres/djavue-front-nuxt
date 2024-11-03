@@ -8,7 +8,7 @@
         <v-card class="mx-auto pa-8 pb-8 border-md" elevation="0" max-width="448" rounded="lg">
             <div class="text-subtitle-1 text-medium-emphasis">E-mail</div>
 
-            <v-text-field  v-model="user.name" density="compact" placeholder="Endereço de e-mail"
+            <v-text-field v-model="user.name" density="compact" placeholder="Endereço de e-mail"
                 prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
 
             <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
@@ -23,7 +23,8 @@
                 prepend-inner-icon="mdi-lock-outline" variant="outlined"
                 @click:append-inner="visible = !visible"></v-text-field>
 
-            <v-btn is="submit" :loading="loading" @click="login(user.name, user.password)" class="mb-8" color="primary" size="large" variant="tonal" block>
+            <v-btn is="submit" :loading="loading" @click="login(user.name, user.password)" class="mb-8" color="primary"
+                size="large" variant="tonal" block>
                 Entrar
             </v-btn>
 
@@ -64,11 +65,11 @@ const user = reactive({
 
 })
 
-watch(loggedUser, () => {
-    if (loggedUser.value) {
-        navigateTo('/tasks')
-    }
-}, { immediate: true })
+// watch(loggedUser, () => {
+//     if (loggedUser.value) {
+//         navigateTo('/home')
+//     }
+// }, { immediate: true })
 
 
 </script>

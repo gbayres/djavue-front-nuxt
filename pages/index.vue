@@ -20,4 +20,10 @@ useHead({
     { name: 'description', content: 'Gerador de projeto full-stack com Django e Vue' }
   ],
 })
+
+const { whoAmI } = useAccountStore()
+
+onMounted(async () => {
+  const res = await whoAmI()
+})
 </script>

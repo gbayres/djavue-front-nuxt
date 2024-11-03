@@ -1,28 +1,25 @@
-FROM node:18.18-slim
+FROM node:23-alpine3.19
 
 WORKDIR /frontend
 
-# Install basic SO and Python
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  curl vim wget \
-  build-essential \
-  && npm install -g npm@10.9.0 \
-  && npm install -g pnpm \
-  && rm -rf /var/lib/apt/lists/* \
-  && npm install -g pm2@5.2.0
+# Copy only necessary files for installation to improve caching
+COPY . /frontend
 
-#### Prepare Frontend Vuejs 3
+# Install dependencies
+RUN apk update 
 
-COPY ./package.json ./pnpm-lock.yaml ./
+RUN npm install -g pnpm 
 
+# Install project dependencies
 RUN pnpm install
 
-COPY . ./
+RUN pnpm run build
 
-RUN pnpm run prod
-
-ENV SHELL=/bin/bash LANG=en_US.UTF-8
-
-COPY . ./
-
+# Expose the application port
 EXPOSE 3000
+
+# Set the default command
+CMD ["node", "/frontend/.output/server/index.mjs"]
+
+# Set environment variables
+ENV SHELL=/bin/bash LANG=en_US.UTF-8

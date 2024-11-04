@@ -58,18 +58,11 @@ const visible = ref(false)
 
 const accountStore = useAccountStore()
 const { login } = accountStore;
-const { loggedUser, loading } = storeToRefs(accountStore)
+const { loading } = storeToRefs(accountStore)
 const user = reactive({
     name: '',
     password: '',
 
 })
-
-// watch(loggedUser, () => {
-//     if (loggedUser.value) {
-//         navigateTo('/home')
-//     }
-// }, { immediate: true })
-
 
 </script>

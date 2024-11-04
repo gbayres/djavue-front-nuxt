@@ -18,9 +18,9 @@
         </template>
     </v-list-item>
 </template>
+
 <script setup lang="ts">
 import type { Task } from '~/types/tasks';
-
 const { task } = defineProps<{
     task: Task
 }>()

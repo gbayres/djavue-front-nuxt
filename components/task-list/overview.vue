@@ -22,22 +22,20 @@
     </v-row>
 </template>
 <script setup lang="ts">
-import type { Task } from '~/types/tasks';
 
-const { tasks } = defineProps<{
-    tasks: Task[]
-}>()
+const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore)
 
 const completedTasks = computed(() => {
-    return tasks.filter((task) => task.done).length;
+    return tasks.value.filter((task) => task.done).length;
 });
 
 const progress = computed(() => {
-    return (completedTasks.value / tasks.length) * 100;
+    return (completedTasks.value / tasks.value.length) * 100;
 });
 
 const remainingTasks = computed(() => {
-    return tasks.length - completedTasks.value;
+    return tasks.value.length - completedTasks.value;
 });
 
 </script>

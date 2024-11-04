@@ -9,8 +9,7 @@
     </v-card>
 </template>
 <script setup lang="ts">
-import type { Task } from '~/types/tasks';
-const { tasks } = defineProps<{
-    tasks: Task[]
-}>()
+const taskStore = useTaskStore()
+const { tasks: tasksRef } = storeToRefs(taskStore)
+const tasks = computed(() => tasksRef.value)
 </script>

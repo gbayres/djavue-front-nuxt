@@ -1,21 +1,4 @@
-type UserType = {
-  id: number;
-  name: string;
-  username: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  avatar: string | null;
-  bio: string | null;
-  permissions: {
-    ADMIN: boolean;
-    STAFF: boolean;
-  };
-};
-
-type AuthenticatedType = {
-  authenticated: boolean;
-};
+import type { AuthenticatedType, UserType } from "~/types/user";
 
 export const useAccountStore = defineStore("account-store", () => {
   const loggedUser = ref<UserType | null | undefined>(undefined);

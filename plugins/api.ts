@@ -1,3 +1,5 @@
+type HeadersWithCSRFToken = Headers & { "X-CSRFTOKEN": string }
+
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
 
@@ -8,7 +10,7 @@ export default defineNuxtPlugin(() => {
       options.headers = {
         ...options.headers,
         "X-CSRFTOKEN": csrftoken,
-      } as Headers & { "X-CSRFTOKEN": string };
+      } as HeadersWithCSRFToken;
     },
     credentials: "include",
     headers: {

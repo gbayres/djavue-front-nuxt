@@ -1,6 +1,6 @@
 <template>
-    <v-btn @click="navigate" variant="plain" class="px-2 text-primary font-weight-bold text-capitalize"
-        style="text-decoration: none">
+    <v-btn @click="navigate" variant="plain" class="text-primary font-weight-bold text-capitalize"
+        style="text-decoration: none;">
         <slot></slot>
     </v-btn>
     <HeaderNavDivider v-if="divider" />

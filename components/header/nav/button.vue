@@ -3,7 +3,7 @@
         style="text-decoration: none;">
         <slot></slot>
     </v-btn>
-    <HeaderNavDivider v-if="divider" />
+    <v-divider v-if="divider" class="py-auto" vertical inset thickness="2px" />
 </template>
 
 <script setup lang="ts">

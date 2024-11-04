@@ -7,6 +7,7 @@
     </div>
 </template>
 
+
 <style scoped>
 .description {
     opacity: 0.85;
@@ -19,8 +20,8 @@
 }
 </style>
 
-<script setup lang="ts">
 
+<script setup lang="ts">
 const { title, description, details } = defineProps<{
     title: string,
     description: string,

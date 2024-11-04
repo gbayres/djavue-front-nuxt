@@ -1,0 +1,43 @@
+<template>
+    <v-row align="center" class="text-primary my-1">
+        <strong class="mx-4 text-success-darken-2">
+            Feitas: {{ completedTasks }}
+        </strong>
+
+        <v-divider vertical></v-divider>
+
+        <strong class="mx-4 text-info-darken-2">
+            Restam: {{ remainingTasks }}
+        </strong>
+
+        <v-divider vertical></v-divider>
+
+        <strong class="mx-4 text-success-darken-2">
+            Total: {{ tasks.length }}
+        </strong>
+
+        <v-spacer></v-spacer>
+
+        <v-progress-circular color="primary" v-model="progress" class="d-none d-md-flex me-2"></v-progress-circular>
+    </v-row>
+</template>
+<script setup lang="ts">
+import type { Task } from '~/types/tasks';
+
+const { tasks } = defineProps<{
+    tasks: Task[]
+}>()
+
+const completedTasks = computed(() => {
+    return tasks.filter((task) => task.done).length;
+});
+
+const progress = computed(() => {
+    return (completedTasks.value / tasks.length) * 100;
+});
+
+const remainingTasks = computed(() => {
+    return tasks.length - completedTasks.value;
+});
+
+</script>

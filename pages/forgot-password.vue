@@ -1,5 +1,5 @@
 <template>
-
+  <YouCanHelp />
 </template>
 <script setup lang="ts">
 

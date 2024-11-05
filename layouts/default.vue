@@ -6,5 +6,3 @@
         </v-layout>
     </v-card>
 </template>
-
-<style></style>

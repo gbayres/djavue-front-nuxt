@@ -1,8 +1,10 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const accounts = useAccountStore();
-  const { loggedUser } = storeToRefs(accounts);
-  if (loggedUser.value === undefined) {
-    const { whoAmI } = useAccountStore();
-    await whoAmI();
-  }
+    const account = useAccountStore()
+    const { whoAmI } = account
+    const { loggedUser } = storeToRefs(account)
+    onNuxtReady(async () => {
+        if (loggedUser.value === undefined) {
+            await whoAmI()
+        }
+    })
 });

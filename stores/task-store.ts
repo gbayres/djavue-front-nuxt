@@ -1,8 +1,19 @@
-import type { Task } from "~/types/tasks";
+import type { Task, TasksOutput } from "~/types/tasks";
 
 export const useTaskStore = defineStore('task-store', () => {
     const tasks = ref<Task[]>([])
     const newTaskDescription = ref<string | null>(null)
+
+    async function load() {
+        const { $api } = useNuxtApp()
+        try {
+            const res = await $api<TasksOutput>("/api/core/tasks/list")
+            tasks.value = res.tasks
+        } catch (e) {
+            console.log(e)
+            tasks.value = []
+        }
+    }
 
     async function create() {
         if (newTaskDescription.value) {
@@ -28,5 +39,5 @@ export const useTaskStore = defineStore('task-store', () => {
         }
     }
 
-    return { tasks, newTaskDescription, create }
+    return { tasks, newTaskDescription, create, load }
 })
